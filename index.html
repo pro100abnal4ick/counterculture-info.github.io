@@ -2,847 +2,173 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контр-Культура</title>
-    <link rel="icon" href="favicon.png" type="image/png" id="favicon">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        html, body {
+        :root {
+            --accent: #000000;
+            --bg-color: #ebebeb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--accent);
+            overflow-x: hidden;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth; 
-            height: 100%;
-            height: 100vh;
-            height: 100dvh;
-            overflow-x: hidden;
-            overflow-y: hidden; 
-            transition: background-color 0.5s, color 0.5s;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #000000, #0b0b0b);
-            filter: contrast(150%);
-            color: white; 
-            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
-        body.light-theme {
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            filter: none;
-            color: black; 
+        .heading-font {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
         }
 
-        .invertible-content {
-            transition: filter 0.5s ease;
+        .fade-in {
+            animation: fadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
-        body.light-theme .invertible-content {
-            filter: invert(100%);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        body.light-theme .main-title::after {
-            background-color: black;
+        .quote-border {
+            border-left: 2px solid #d1d1d1;
+            padding-left: 1.5rem;
         }
 
-        body.light-theme .scroll-down-arrow,
-        body.light-theme .scroll-up-arrow {
-            border: 2px solid black;
-        }
-
-        body.light-theme .scroll-down-arrow::after,
-        body.light-theme .scroll-up-arrow::after {
-            border-right: 2px solid black;
-            border-bottom: 2px solid black;
-        }
-
-        body.light-theme .text-content h3 {
-            color: rgba(0, 0, 0, 0.95);
-        }
-
-        body.light-theme .text-content p {
-            color: rgba(0, 0, 0, 0.7);
-        }
-
-        body.light-theme .glass-card,
-        body.light-theme .glass-card:link, 
-        body.light-theme .glass-card:visited, 
-        body.light-theme .glass-card:hover, 
-        body.light-theme .glass-card:active {
-            color: black;
-        }
-        
-        body.light-theme .glass-card {
-            background: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-theme .glass-card:hover {
-            border: 1px solid rgba(0, 0, 0, 0.15);
-            box-shadow: 
-                0 12px 40px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(0, 0, 0, 0.08);
-        }
-
-        body.light-theme .glass-card::before {
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0, 0, 0, 0.03), 
-                transparent
-            );
-        }
-
-        body.light-theme .icon {
-            background: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            transition: background-color 0.5s, border-color 0.5s;
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-
-        .section {
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh;
-            min-height: 100dvh;
-            width: 100vw;
-            position: relative;
-        }
-
-        .section-2 {
-            background: transparent;
-            padding: 20px; 
-            overflow-y: auto; 
-        }
-        
-        .content-container {
+        .btn-action {
             display: flex;
             align-items: center;
-            max-width: 1200px; 
-            padding: 20px;
-        }
-
-        .text-block {
-            text-align: center; 
-            margin-right: 40px; 
-            opacity: 0; 
-            transform: translateY(20px); 
-            animation: fadeInRise 1s ease-out forwards; 
-        }
-
-        .main-title {
-            font-size: 3.5em; 
-            font-weight: 400; 
-            line-height: 1.2;
-            margin-bottom: 5px;
-            padding-bottom: 5px; 
-            position: relative;
-            display: inline-block; 
-        }
-
-        .main-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px; 
-            width: 70%; 
-            height: 1px;
-            background-color: white;
-            left: 50%;
-            transform: translateX(-50%); 
-            transition: background-color 0.5s;
-        }
-
-        .subtitle {
-            font-size: 1.2em; 
-            font-weight: 400;
-            opacity: 0.8; 
-            margin-top: 20px;
-        }
-
-        .logo-placeholder {
-            width: 450px; 
-            height: 500px; 
-            background-color: transparent; 
-            margin-left: 20px; 
-            opacity: 0; 
-            transform: translateY(20px); 
-            animation: fadeInRise 1s ease-out forwards 0.3s;
-        }
-
-        .logo-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-        }
-
-        @keyframes fadeInRise {
-            from {
-                opacity: 0;
-                transform: translateY(20px); 
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0); 
-            }
-        }
-        
-        .scroll-down-arrow,
-        .scroll-up-arrow {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            display: block;
-            width: 30px;
-            height: 30px;
-            border: 2px solid white;
-            border-radius: 50%;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: opacity 0.3s ease, border-color 0.5s;
-            z-index: 10;
-        }
-        
-        .scroll-down-arrow {
-            bottom: 30px; 
-        }
-
-        .scroll-up-arrow {
-            top: 30px; 
-        }
-
-        .scroll-down-arrow:hover,
-        .scroll-up-arrow:hover {
-            opacity: 1;
-        }
-
-        .scroll-down-arrow::after,
-        .scroll-up-arrow::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            border-right: 2px solid white;
-            border-bottom: 2px solid white;
-            transition: border-color 0.5s;
-        }
-        
-        .scroll-down-arrow::after {
-            transform: translate(-50%, -60%) rotate(45deg); 
-            animation: bounce-down 2s infinite;
-        }
-
-        .scroll-up-arrow::after {
-            transform: translate(-50%, -40%) rotate(-135deg); 
-            animation: bounce-up 2s infinite;
-        }
-        
-        @keyframes bounce-down {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translate(-50%, -60%) rotate(45deg) translateY(0);
-            }
-            40% {
-                transform: translate(-50%, -60%) rotate(45deg) translateY(5px);
-            }
-            60% {
-                transform: translate(-50%, -60%) rotate(45deg) translateY(3px);
-            }
-        }
-
-        @keyframes bounce-up {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translate(-50%, -40%) rotate(-135deg) translateY(0);
-            }
-            40% {
-                transform: translate(-50%, -40%) rotate(-135deg) translateY(-5px);
-            }
-            60% {
-                transform: translate(-50%, -40%) rotate(-135deg) translateY(-3px);
-            }
-        }
-        
-        .section-2 .container {
-            width: 100%;
-            max-width: 500px;
-        }
-        
-        .glass-card, 
-        .glass-card:link, 
-        .glass-card:visited, 
-        .glass-card:hover, 
-        .glass-card:active {
+            justify-content: center;
+            padding: 1rem 1.5rem;
+            background: var(--accent);
             color: white;
-            text-decoration: none; 
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            display: block; 
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.03), 
-                transparent
-            );
-            transition: left 0.6s ease;
-        }
-
-        .glass-card:hover::before {
-            left: 100%;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 12px 40px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-        }
-
-        .card-content {
-            display: flex;
-            align-items: center;
-            color: inherit; 
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
             text-decoration: none;
         }
 
-        .icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .btn-action:hover {
+            background: #222;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .icon svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-            opacity: 0.9;
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
         }
 
-        .text-content h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: rgba(255, 255, 255, 0.95);
-            transition: color 0.5s;
+        .btn-outline:hover {
+            background: var(--accent);
+            color: #ebebeb;
         }
 
-        .text-content p {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            transition: color 0.5s;
-        }
-        
-        @media (max-width: 768px) {
-            html, body {
-                height: 100vh;
-                height: 100dvh;
-                overflow: hidden;
-            }
-
-            body {
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                height: 100vh;
-                height: 100dvh;
-            }
-
-            .content-container {
-                flex-direction: column; 
-                text-align: center;
-                padding: 10px;
-                max-width: 100%;
-            }
-
-            .section-1 {
-                padding-top: 60px; 
-                padding-bottom: 60px;
-            }
-
-            .text-block {
-                margin-right: 0; 
-                margin-bottom: 30px; 
-            }
-
-            .main-title {
-                font-size: 2.5em; 
-            }
-            
-            .main-title::after {
-                width: 100%; 
-                left: 0;
-                transform: none; 
-                bottom: -5px;
-            }
-
-            .logo-placeholder {
-                width: 100%; 
-                max-width: 300px; 
-                height: auto; 
-                margin-left: 0; 
-                margin: 0 auto; 
-            }
-            
-            .logo-placeholder img {
-                height: auto;
-                max-height: 300px; 
-            }
-
-            #theme-toggle {
-                top: 10px;
-                right: 10px;
-                width: 35px;
-                height: 35px;
-            }
-            
-            #theme-toggle svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .section-2 {
-                padding-bottom: calc(250px + env(safe-area-inset-bottom, 0px));
-            }
-
-            .section-2 .container {
-                padding-bottom: 40px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 2em; 
-            }
-            .subtitle {
-                font-size: 1.1em; 
-            }
-            
-            .logo-placeholder {
-                max-width: 200px; 
-                margin-bottom: 10px;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .section-2 {
-                padding-bottom: calc(280px + env(safe-area-inset-bottom, 0px));
-            }
-
-            .section-2 .container {
-                padding-bottom: 60px;
-            }
-
-            .section-2 .container {
-                max-width: 100%;
-            }
-            
-            .glass-card {
-                padding: 20px;
-                backdrop-filter: blur(30px);
-                -webkit-backdrop-filter: blur(30px);
-            }
-            
-            .icon {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .icon svg {
-                width: 20px;
-                height: 20px;
-            }
-            
-            .text-content h3 {
-                font-size: 16px;
-            }
-            
-            .text-content p {
-                font-size: 13px;
-            }
-            
-            .scroll-down-arrow,
-            .scroll-up-arrow { 
-                bottom: 20px;
-                width: 25px;
-                height: 25px;
-            }
-            
-            .scroll-down-arrow::after,
-            .scroll-up-arrow::after { 
-                width: 8px;
-                height: 8px;
-            }
-
-            .scroll-up-arrow {
-                top: 20px; 
-            }
-        }
-        
-        .section-1 {
+        .image-container {
+            width: 100%;
+            height: 100%;
             position: relative;
         }
 
-        #theme-toggle {
-            position: absolute; 
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.5s, color 0.5s, border-color 0.5s;
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        #theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .image-container:hover .main-image {
+            transform: scale(1.03);
         }
 
-        body.light-theme #theme-toggle {
-            background: rgba(0, 0, 0, 0.1);
-            color: black;
-            border: 1px solid rgba(0, 0, 0, 0.2);
+        @media (max-width: 768px) {
+            .quote-border {
+                padding-left: 1rem;
+            }
+            .btn-action {
+                padding: 1.2rem 1.5rem; 
+            }
+            .heading-font {
+                font-size: 3rem;
+                line-height: 1.1;
+            }
+            .mobile-stack {
+                display: flex;
+                flex-direction: column;
+            }
+            .order-img { order: 1; }
+            .order-txt { order: 2; }
         }
-
-        body.light-theme #theme-toggle:hover {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        
-        #theme-toggle svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            transition: transform 0.3s;
-        }
-
-        #theme-toggle:active svg {
-            transform: rotate(360deg);
-        }
-
     </style>
 </head>
 <body>
-    
-    <div class="section section-1" id="section1">
+
+    <main class="min-h-screen flex flex-col md:flex-row items-stretch relative mobile-stack">
         
-        <button id="theme-toggle" aria-label="Переключить тему">
-            <svg id="moon-icon" viewBox="0 0 24 24" style="display: none;">
-                <path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.12-1.36A6.994 6.994 0 0112 3z"/>
-            </svg>
-            <svg id="sun-icon" viewBox="0 0 24 24" style="display: block;">
-                <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58l1.41-1.41c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L7.4 5.99c-.39.39-1.02.39-1.41 0-.38-.38-.38-1.02.01-1.41zM17.8 16.4l1.41 1.41c.39.39.39 1.02 0 1.41-.39.39-1.02.39-1.41 0l-1.41-1.41c-.39-.39-.39-1.02 0-1.41.38-.38 1.02-.38 1.41.01zM18.41 5.99l1.41-1.41c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41.38.39 1.02.39 1.41 0zM7.4 18.41l-1.41 1.41c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41c.39-.39 1.02-.39 1.41 0 .39.38.39 1.02 0 1.41z"/>
-            </svg>
-        </button>
-        
-        <div class="content-container">
-            <div class="text-block">
-                <h1 class="main-title">Контр-Культура</h1>
-                <p class="subtitle">Учусь, учу и делюсь мыслями</p>
+        <section class="w-full md:w-1/2 flex flex-col justify-center py-12 md:py-16 px-6 md:px-16 lg:px-24 z-10 order-txt">
+            <div class="fade-in">
+                <h1 class="heading-font text-5xl md:text-6xl lg:text-7xl mb-6 leading-[1.1] text-black">
+                    Контр-<br>Культура
+                </h1>
+                
+                <div class="quote-border mt-8">
+                    <p class="text-lg md:text-xl font-light text-neutral-600 italic leading-relaxed max-w-lg">
+                        «Цель проекта в постоянном обучении и продвижении корректного обращения с информацией»
+                    </p>
+                </div>
+                
+                <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl">
+                    <a href="https://t.me/+4R0zClJviUgyYzg0" target="_blank" class="btn-action">
+                        Канал Telegram
+                    </a>
+                    <a href="https://t.me/+CrjejnyPpfplNjYy" target="_blank" class="btn-action btn-outline">
+                        Чат проекта
+                    </a>
+                    <a href="https://counterprice.live/" target="_blank" class="btn-action btn-outline">
+                        Прайс-лист
+                    </a>
+                    <a href="https://t.me/+ATsYwAUKJVU5ZDgy" target="_blank" class="btn-action btn-outline">
+                        Отзывы
+                    </a>
+                    <a href="https://t.me/send?start=SBPc-xqn6JrChhZTNi" target="_blank" class="btn-action btn-outline sm:col-span-2">
+                        Личный архив
+                    </a>
+                </div>
             </div>
-            
-            <div class="logo-placeholder" id="logo-placeholder">
-                <img src="logo.png" alt="Логотип Контр-Культура" class="invertible-content">
+
+            <div class="mt-16 md:hidden text-[9px] uppercase tracking-[0.4em] text-neutral-400">
+                [ COUNTER-CULTURE // DATA INTEGRITY ] &copy; 2026
             </div>
-        </div>
-        <a href="#section2" class="scroll-down-arrow" aria-label="Скролл вниз"></a>
-    </div>
-    
-    <div class="section section-2" id="section2">
-        <div class="container">
-            <a href="https://t.me/+4R0zClJviUgyYzg0" class="glass-card" target="_blank">
-                <div class="card-content">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.191c-.174.761-1.408 6.832-1.999 9.079-.257.984-.586 1.311-.958 1.34-.825.064-1.453-.545-2.253-1.069-1.25-.819-1.956-1.328-3.167-2.129-1.403-.92-.494-1.426.306-2.253.211-.218 3.879-3.558 3.95-3.861.008-.032.016-.151-.059-.214-.074-.063-.183-.042-.262-.024-.112.025-1.878 1.192-5.302 3.5-.503.341-.958.508-1.365.5-.448-.009-1.311-.254-1.953-.464-.787-.259-1.414-.395-1.358-.834.027-.216.324-.437.892-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.1-.002.325.023.47.14.118.095.151.223.166.312.015.09.033.297.018.458z"/>
-                        </svg>
-                    </div>
-                    <div class="text-content">
-                        <h3>Телеграм-канал</h3>
-                        <p>Подпишитесь на наш основной канал</p>
-                    </div>
-                </div>
-            </a>
+        </section>
 
-            <a href="https://t.me/+CrjejnyPpfplNjYy" class="glass-card" target="_blank">
-                <div class="card-content">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
-                            <path d="M7 9h10v2H7zm0 4h7v2H7z"/>
-                        </svg>
-                    </div>
-                    <div class="text-content">
-                        <h3>Чат</h3>
-                        <p>Присоединяйтесь к обсуждениям</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://counterprice.live" class="glass-card" target="_blank">
-                <div class="card-content">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                        </svg>
-                    </div>
-                    <div class="text-content">
-                        <h3>Услуги</h3>
-                        <p>Ознакомьтесь с нашими услугами</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://t.me/send?start=SBPc-xqn6JrChhZTNi" class="glass-card" target="_blank">
-                <div class="card-content">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
-                        </svg>
-                    </div>
-                    <div class="text-content">
-                        <h3>Подписка на Личный Архив</h3>
-                        <p>Получите доступ к эксклюзивному контенту</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="https://t.me/+ATsYwAUKJVU5ZDgy" class="glass-card" target="_blank">
-                <div class="card-content">
-                    <div class="icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                        </svg>
-                    </div>
-                    <div class="text-content">
-                        <h3>Отзывы</h3>
-                        <p>Читайте отзывы наших клиентов</p>
-                    </div>
-                </div>
-            </a>
+        <section class="w-full md:w-1/2 h-[40vh] md:h-auto overflow-hidden order-img">
+            <div class="image-container h-full">
+                <img 
+                    src="logo.png" 
+                    alt="Контр-Культура Лого" 
+                    class="main-image"
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex items-center justify-center h-full bg-neutral-200 uppercase tracking-widest text-neutral-400\'>Logo Placeholder</div>'"
+                >
             </div>
-        <a href="#section1" class="scroll-up-arrow" aria-label="Скролл вверх"></a> 
-    </div>
+        </section>
 
-    <script>
-        const body = document.body;
-        const themeToggle = document.getElementById('theme-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
-        const favicon = document.getElementById('favicon');
+    </main>
 
-        function setTheme(isLight) {
-            if (isLight) {
-                body.classList.add('light-theme');
-                moonIcon.style.display = 'block'; 
-                sunIcon.style.display = 'none'; 
-                localStorage.setItem('theme', 'light');
-                favicon.classList.add('invertible-content');
-            } else {
-                body.classList.remove('light-theme');
-                sunIcon.style.display = 'block'; 
-                moonIcon.style.display = 'none'; 
-                localStorage.setItem('theme', 'dark');
-                favicon.classList.remove('invertible-content');
-            }
-        }
-
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            setTheme(true);
-        } else {
-            setTheme(false); 
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const isLight = body.classList.contains('light-theme');
-            setTheme(!isLight);
-        });
-
-        const sections = document.querySelectorAll('.section');
-        let currentSectionIndex = 0;
-        let isScrolling = false;
-        
-        function goToSection(index) {
-            if (index >= 0 && index < sections.length) {
-                isScrolling = true;
-                sections[index].scrollIntoView({ behavior: 'smooth' });
-                currentSectionIndex = index;
-
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 1000);
-            }
-        }
-        
-        document.querySelector('.scroll-down-arrow').addEventListener('click', (e) => {
-            e.preventDefault();
-            goToSection(1);
-        });
-
-        document.querySelector('.scroll-up-arrow').addEventListener('click', (e) => {
-            e.preventDefault();
-            goToSection(0); 
-        });
-
-        const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
-
-        if (!isMobile) {
-            window.addEventListener('wheel', (e) => {
-                if (isScrolling) {
-                    e.preventDefault();
-                    return;
-                }
-
-                if (e.deltaY > 0) {
-                    goToSection(currentSectionIndex + 1);
-                } else if (e.deltaY < 0) {
-                    goToSection(currentSectionIndex - 1);
-                }
-                e.preventDefault(); 
-            }, { passive: false });
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (isScrolling) return;
-
-            if (e.key === 'ArrowDown') {
-                goToSection(currentSectionIndex + 1);
-            } else if (e.key === 'ArrowUp') {
-                goToSection(currentSectionIndex - 1);
-            }
-        });
-
-        if (isMobile) {
-            let touchStartY = 0;
-            let touchEndY = 0;
-            let touchStartX = 0;
-            const minSwipeDistance = 50;
-            let isTouchMoving = false;
-            let touchStartTime = 0;
-
-            document.addEventListener('touchstart', (e) => {
-                if (isScrolling) return;
-                
-                const touchTarget = e.target;
-                const isInteractive = touchTarget.closest('a, button, input, textarea, select');
-                
-                if (!isInteractive) {
-                    touchStartY = e.changedTouches[0].screenY;
-                    touchStartX = e.changedTouches[0].screenX;
-                    touchStartTime = Date.now();
-                    isTouchMoving = false;
-                }
-            }, { passive: true });
-
-            document.addEventListener('touchmove', (e) => {
-                if (isScrolling) return;
-                
-                const touchTarget = e.target;
-                const isInteractive = touchTarget.closest('a, button, input, textarea, select');
-                if (isInteractive && touchStartY === 0) return;
-                
-                if (touchStartY === 0) {
-                    touchStartY = e.changedTouches[0].screenY;
-                    touchStartX = e.changedTouches[0].screenX;
-                }
-                
-                const currentY = e.changedTouches[0].screenY;
-                const currentX = e.changedTouches[0].screenX;
-                const deltaY = Math.abs(currentY - touchStartY);
-                const deltaX = Math.abs(currentX - touchStartX);
-                
-                if (deltaY > 10 || deltaX > 10) {
-                    isTouchMoving = true;
-                    if (deltaY > deltaX && !isInteractive) {
-                        e.preventDefault();
-                    }
-                }
-            }, { passive: false });
-
-            document.addEventListener('touchend', (e) => {
-                if (isScrolling || touchStartY === 0) {
-                    touchStartY = 0;
-                    touchStartX = 0;
-                    isTouchMoving = false;
-                    return;
-                }
-                
-                const touchTarget = e.target;
-                const isInteractive = touchTarget.closest('a, button, input, textarea, select');
-                const touchDuration = Date.now() - touchStartTime;
-                
-                if (isInteractive && touchDuration < 300) {
-                    touchStartY = 0;
-                    touchStartX = 0;
-                    isTouchMoving = false;
-                    return;
-                }
-                
-                if (!isTouchMoving) {
-                    touchStartY = 0;
-                    touchStartX = 0;
-                    return;
-                }
-                
-                touchEndY = e.changedTouches[0].screenY;
-                const swipeDistance = touchStartY - touchEndY;
-
-                if (Math.abs(swipeDistance) > minSwipeDistance) {
-                    if (swipeDistance > 0) {
-                        goToSection(currentSectionIndex + 1);
-                    } else {
-                        goToSection(currentSectionIndex - 1);
-                    }
-                }
-                
-                touchStartY = 0;
-                touchStartX = 0;
-                isTouchMoving = false;
-            }, { passive: true });
-        }
-    </script>
+    <footer class="hidden md:block fixed bottom-8 left-8 md:left-16 text-[10px] uppercase tracking-[0.5em] text-neutral-400">
+        [ COUNTER-CULTURE // DATA INTEGRITY ] &copy; 2026
+    </footer>
 
 </body>
 </html>
